@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('homepage');
 
 Route::name('user.')->group(function(){
    Route::view('/private', 'private')->middleware('auth')->name('private');
