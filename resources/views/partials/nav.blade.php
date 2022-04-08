@@ -14,7 +14,7 @@
                 <li>
                     <a
                         href="{{ url('/users') }}"
-                        class="nav-link px-2 {{ (request()->is('user')) ? 'text-white' : 'text-secondary' }}"
+                        class="nav-link px-2 {{ (request()->is('users')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Users list
                     </a>
@@ -36,6 +36,15 @@
                         class="nav-link px-2 {{ (request()->is('user/detail/*')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{{ url('/users/roles/create') }}"
+                        class="nav-link px-2 {{ (request()->is('users/roles/create')) ? 'text-white' : 'text-secondary' }}"
+                    >
+                        Create role
                     </a>
                 </li>
 

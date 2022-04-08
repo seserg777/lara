@@ -5,7 +5,7 @@
     <form class="col-3 offset-4" method="POST" action="{{ route('user.login') }}">
         @csrf
         <div class="form-floating">
-            <input class="form-control" id="email" name="email" type="text" value="" placeholder="Email">
+            <input class="form-control" id="email" name="email" type="text" placeholder="Email">
             <label for="email" class="floatingInput">E-mail</label>
             @error('email')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-floating">
-            <input class="form-control" id="password" name="password" type="text" value="" placeholder="Password">
+            <input class="form-control" id="password" name="password" type="password" placeholder="Password">
             <label for="password" class="floatingInput">Password</label>
             @error('password')
             <div class="alert alert-danger">{{ $message }}</div>

@@ -4,6 +4,7 @@
 namespace App\Services\Common;
 
 use App\Http\Requests\Common\User\UpdateUserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Models\User;
 
 class UserService
@@ -25,10 +26,25 @@ class UserService
         return User::findOrFail($id);
     }
 
-    public function update(UpdateUserRequest $request)
+    public function update(EditUserRequest $request)
     {
+        /*if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }*/
+
         $user = User::findOrFail($request->id);
         $user->update($request->validated());
+
+        $userRole = $request->input('role');
+        if ($userRole !== null) {
+            $user->roles()->detach();
+            $user->roles()->attach($userRole);
+        }
+
+        //dump($user);
+        //dd('update');
+
+        return $user->first();
     }
 
     public function all()

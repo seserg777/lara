@@ -10,7 +10,7 @@
                 <span class="name mt-3">{{ $user->name }}</span>
                 <span class="idd">{{ $user->email }}</span>
                 <div class=" d-flex mt-2">
-                    <a href="{{ url('/users/detail/1/edit') }}" class="btn1 btn-dark">Edit Profile</a>
+                    <a href="{{ route('user.edit', ['id' => 1]) }}" class="btn1 btn-dark">Edit Profile</a>
                 </div>
                 <div class=" px-2 rounded mt-4 date ">
                     <span class="join">

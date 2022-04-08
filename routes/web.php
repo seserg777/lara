@@ -47,6 +47,18 @@ Route::name('user.')->group(function(){
 
     Route::get('/users/detail/{id}', [\App\Http\Controllers\Common\UserController::class, 'show'])->name('detail');
     Route::get('/users/detail/{id}/edit', '\App\Http\Controllers\Common\UserController@edit')->name('edit');
-    Route::post('/users/detail/{id}/edit', [\App\Http\Controllers\Common\UserController::class, 'update']);
+    Route::put('/users/detail/{user}/edit', '\App\Http\Controllers\Common\UserController@update');
     Route::get('/users', '\App\Http\Controllers\Common\UserController@index')->name('index');
+
+    Route::resource(
+        '/users/roles',
+        \App\Http\Controllers\Common\RoleController::class,
+        [
+            'names' => [
+                'index' => 'role.index',
+                'store' => 'role.store',
+                'create' => 'role.create'
+            ]
+        ]
+    );
 });
