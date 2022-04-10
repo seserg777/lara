@@ -20,13 +20,6 @@ Route::get('/', function () {
 Route::name('user.')->group(function(){
    Route::view('/private', 'private')->middleware('auth')->name('private');
 
-   Route::get('/login', function(){
-      if(Auth::check()){
-          return redirect(route('user.private'));
-      }
-      return view('user.login');
-   })->name('login');
-
    Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
 
    Route::get('/logout', function(){
@@ -44,11 +37,8 @@ Route::name('user.')->group(function(){
     Route::get('/registration', '\App\Http\Controllers\Common\UserController@registration')->name('registration');
     Route::post('/registration', [\App\Http\Controllers\RegisterController::class, 'save']);
 
+    //Route::post('/users/{id}', '\App\Http\Controllers\Common\UserController@update')->name('update');
 
-    Route::get('/users/detail/{id}', [\App\Http\Controllers\Common\UserController::class, 'show'])->name('detail');
-    Route::get('/users/detail/{id}/edit', '\App\Http\Controllers\Common\UserController@edit')->name('edit');
-    Route::put('/users/detail/{user}/edit', '\App\Http\Controllers\Common\UserController@update');
-    Route::get('/users', '\App\Http\Controllers\Common\UserController@index')->name('index');
 
     Route::resource(
         '/users/roles',
@@ -57,8 +47,32 @@ Route::name('user.')->group(function(){
             'names' => [
                 'index' => 'role.index',
                 'store' => 'role.store',
-                'create' => 'role.create'
+                'create' => 'role.create',
+                'edit' => 'role.edit',
+                'update' => 'role.update',
+                'delete' => 'role.delete'
             ]
         ]
     );
 });
+
+Route::get('login', function(){
+    if(Auth::check()){
+        return redirect(route('user.private'));
+    }
+    return view('user.login');
+})->name('login');
+
+Route::resource(
+    'user',
+    \App\Http\Controllers\Common\UserController::class,
+    [
+        'only' => [
+            'index',
+            'show',
+            'edit',
+            'update',
+            'create',
+        ],
+    ]
+);

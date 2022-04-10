@@ -8,6 +8,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>E-mail</th>
+                <th>Role</th>
             </tr>
         </thead>
         <tbody>
@@ -15,11 +16,16 @@
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>
-                        <a href="{{ url('/users/detail', ['id' => $user->id]) }}">
+                        <a href="{{ route('user.show', ['user' => $user]) }}">
                             {{ $user->name }}
                         </a>
                     </td>
                     <td>{{$user->email}}</td>
+                    <td>
+                        @foreach($user->roles as $role)
+                            {{ $role->name }}
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
         </tbody>

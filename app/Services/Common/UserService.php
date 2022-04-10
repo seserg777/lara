@@ -3,7 +3,8 @@
 
 namespace App\Services\Common;
 
-use App\Http\Requests\Common\User\UpdateUserRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\Common\UpdateUserRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Models\User;
 
@@ -23,32 +24,26 @@ class UserService
 
     public function detail($id)
     {
-        return User::findOrFail($id);
+        return User::with('roles')->findOrFail($id);
     }
 
-    public function update(EditUserRequest $request)
+    public function update(Request $request, User $user)
     {
-        /*if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }*/
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
 
-        $user = User::findOrFail($request->id);
-        $user->update($request->validated());
+        $user->save();
 
         $userRole = $request->input('role');
         if ($userRole !== null) {
             $user->roles()->detach();
             $user->roles()->attach($userRole);
         }
-
-        //dump($user);
-        //dd('update');
-
-        return $user->first();
     }
 
     public function all()
     {
-        return User::paginate(10);
+        return User::with('roles')->paginate(10);
     }
 }

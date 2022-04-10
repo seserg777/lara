@@ -13,7 +13,7 @@
 
                 <li>
                     <a
-                        href="{{ url('/users') }}"
+                        href="{{ url('/user') }}"
                         class="nav-link px-2 {{ (request()->is('users')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Users list
@@ -32,8 +32,8 @@
 
                 <li>
                     <a
-                        href="{{ url('/users/detail/1') }}"
-                        class="nav-link px-2 {{ (request()->is('user/detail/*')) ? 'text-white' : 'text-secondary' }}"
+                        href="{{ url('/users/1') }}"
+                        class="nav-link px-2 {{ (request()->is('user/*')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Profile
                     </a>
