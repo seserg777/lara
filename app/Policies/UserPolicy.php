@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -17,7 +18,13 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        dd('viewAny');
+    }
+
+    public function index(?User $user)
+    {
+        dump('index UserPolicy');
+        return true;
     }
 
     /**
@@ -29,7 +36,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        dd('view');
     }
 
     /**
@@ -89,5 +96,12 @@ class UserPolicy
     public function forceDelete(User $user, User $model)
     {
         //
+    }
+
+    public function viewUserGroup(?User $user)
+    {
+        $authUser = Auth::user();
+        //dump('viewUserGroup', $authUser, $user);
+        return true;
     }
 }

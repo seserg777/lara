@@ -21,11 +21,13 @@
                         </a>
                     </td>
                     <td>{{$user->email}}</td>
-                    <td>
-                        @foreach($user->roles as $role)
-                            {{ $role->name }}
-                        @endforeach
-                    </td>
+                    @can('view-user-group', \App\Models\User::class)
+                        <td>
+                            @foreach($user->roles as $role)
+                                {{ $role->name }}
+                            @endforeach
+                        </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

@@ -12,20 +12,30 @@ use Validator;
 
 class UserController extends Controller
 {
+    private $_user;
+
     public function __construct()
     {
         //dd('constructor', request());
-        $this->middleware('auth')->only([
+        /*$this->middleware('auth')->only([
             'edit',
             'update'
-        ]);
+        ]);*/
+
+        //$this->authorizeResource(User::class);
+        $this->_user = Auth::user();
     }
 
     public function index()
     {
         $users = UserService::all();
 
-        return view('user.index', compact('users'));
+        $data = [
+            'users'  => $users,
+            '_user'  => $this->_user
+        ];
+
+        return view('user.index')->with($data);
     }
 
     public function show($id)
@@ -47,7 +57,7 @@ class UserController extends Controller
         $roles = Role::all(['id', 'name']);
         $userRoles = $user->roles()->get();
 
-        dump($roles, $user->roles);
+        //dump($roles, $user->roles);
 
         $data = [
             'user'=>       $user,
@@ -60,12 +70,21 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $pass = $request->input('password');
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:4'
-        ] );
+        //dd($passChange, $request->input('password'), $user->password);
+        if(isset($pass) && !empty($pass)){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|min:4'
+            ] );
+        } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email'
+            ] );
+        }
 
         if($validator->fails()){
             return back()->withErrors($validator)->withInput();
