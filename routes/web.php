@@ -54,6 +54,10 @@ Route::get('/', function () {
 });
 */
 
+Route::name('user.')->group(function() {
+    Route::view('private', 'user.private')->middleware('auth')->name('private');
+});
+
 Route::get('login', function(){
     if(Auth::check()){
         return redirect(route('user.private'));
@@ -69,6 +73,8 @@ Route::get('registration', function(){
     }
     return view('user.registration');
 })->name('registration');
+
+Route::post('registration', [\App\Http\Controllers\RegisterController::class, 'save']);
 
 Route::resource(
     'user',

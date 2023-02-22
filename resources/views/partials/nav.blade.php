@@ -68,6 +68,10 @@
                 </li>
                 @endauth
             </ul>
+
+            @auth
+                Hi!
+            @endauth
         </div>
     </div>
 </header>
