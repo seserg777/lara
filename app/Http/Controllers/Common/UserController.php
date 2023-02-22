@@ -107,4 +107,23 @@ class UserController extends Controller
         }
         return view('user.registration');
     }
+
+    public function private()
+    {
+        if(!Auth::check()){
+            return redirect(route('login'));
+        }
+
+        $user = Auth::user();
+        $userRoles = $user->roles()->get();
+
+        //dump($roles, $user->roles);
+
+        $data = [
+            'user'=>       $user,
+            'userRoles' => $userRoles
+        ];
+
+        return view('user.private')->with($data);
+    }
 }

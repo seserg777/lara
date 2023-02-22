@@ -70,7 +70,7 @@
             </ul>
 
             @auth
-                Hi!
+                Hi, {{ $user->name }}!
             @endauth
         </div>
     </div>

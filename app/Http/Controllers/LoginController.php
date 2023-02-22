@@ -17,7 +17,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($formFields)) {
             //return redirect()->intended(route('user.private'));
-            return redirect(route('homepage'));
+            return redirect(route('user.private'));
         }
 
         return redirect(route('login'))->withErrors([

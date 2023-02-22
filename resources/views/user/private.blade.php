@@ -1,5 +1,7 @@
 @extends('index')
 
 @section('content')
-    Hi!
+    Hi, {{ $user->name }}!
+
+    {{-- dd($userRoles) --}}
 @endsection

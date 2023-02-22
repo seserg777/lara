@@ -55,8 +55,17 @@ Route::get('/', function () {
 */
 
 Route::name('user.')->group(function() {
-    Route::view('private', 'user.private')->middleware('auth')->name('private');
+    //Route::view('private', 'user.private')->middleware('auth')->name('private');
+
+    Route::get('private', [\App\Http\Controllers\Common\UserController::class, 'private'])->name('private');
+
+    Route::get('logout', function(){
+        Auth::logout();
+        return redirect('/');
+    })->name('logout');
 });
+
+
 
 Route::get('login', function(){
     if(Auth::check()){
