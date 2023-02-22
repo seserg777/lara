@@ -40,13 +40,13 @@
             <label for="role" class="floatingInput">Role</label>
         </div>
 
-        <div class="form-floating">
+        <!--<div class="form-floating">
             <input class="form-control" id="password" name="password" type="password" value="" placeholder="Password">
             <label for="password" class="floatingInput">Password</label>
             @error('password')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-        </div>
+        </div>-->
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>
     </form>

@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="h3 mb-3 fw-normal text-center">Registration</h1>
-    <form class="col-3 offset-4" method="POST" action="{{ route('user.registration') }}">
+    <form class="col-3 offset-4" method="POST" action="{{ route('registration') }}">
         @csrf
         <div class="form-floating">
             <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text" value="" placeholder="Name">

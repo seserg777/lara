@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -11,7 +12,7 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect(route('homepage'));
         }
-
+        //echo Hash::make('test');exit;
         $formFields = $request->only(['email', 'password']);
 
         if(Auth::attempt($formFields)) {
@@ -19,7 +20,7 @@ class LoginController extends Controller
             return redirect(route('homepage'));
         }
 
-        return redirect(route('user.login'))->withErrors([
+        return redirect(route('login'))->withErrors([
            'email' => "Can't auth"
         ]);
     }

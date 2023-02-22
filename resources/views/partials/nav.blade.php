@@ -14,7 +14,7 @@
                 <li>
                     <a
                         href="{{ url('/user') }}"
-                        class="nav-link px-2 {{ (request()->is('users')) ? 'text-white' : 'text-secondary' }}"
+                        class="nav-link px-2 {{ (request()->is('user')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Users list
                     </a>
@@ -51,7 +51,7 @@
                 @else
                 <li>
                     <a
-                        href="{{ url('/login') }}"
+                        href="{{ url('login') }}"
                         class="nav-link px-2 {{ (request()->is('login')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Login
@@ -60,7 +60,7 @@
 
                 <li>
                     <a
-                        href="{{ url('/registration') }}"
+                        href="{{ url('registration') }}"
                         class="nav-link px-2 {{ (request()->is('registration')) ? 'text-white' : 'text-secondary' }}"
                     >
                         Registration

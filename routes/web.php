@@ -17,25 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 })->name('homepage');
 
-Route::name('user.')->group(function(){
+/*Route::name('user.')->group(function(){
    Route::view('/private', 'private')->middleware('auth')->name('private');
 
    Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
+
+    Route::get('login', function() {
+        die('user.login');
+    });
 
    Route::get('/logout', function(){
         Auth::logout();
         return redirect('/');
    })->name('logout');
 
-   /*Route::get('/registration', function(){
-       if(Auth::check()){
-           return redirect(route('user.private'));
-       }
-       return view('registration');
-   })->name('registration');*/
-
-    Route::get('/registration', '\App\Http\Controllers\Common\UserController@registration')->name('registration');
-    Route::post('/registration', [\App\Http\Controllers\RegisterController::class, 'save']);
+    //Route::get('/registration', '\App\Http\Controllers\Common\UserController@registration')->name('registration');
+    //Route::post('/registration', [\App\Http\Controllers\RegisterController::class, 'save']);
 
     //Route::post('/users/{id}', '\App\Http\Controllers\Common\UserController@update')->name('update');
 
@@ -55,6 +52,7 @@ Route::name('user.')->group(function(){
         ]
     );
 });
+*/
 
 Route::get('login', function(){
     if(Auth::check()){
@@ -62,6 +60,15 @@ Route::get('login', function(){
     }
     return view('user.login');
 })->name('login');
+
+Route::post('login', [\App\Http\Controllers\LoginController::class, 'login']);
+
+Route::get('registration', function(){
+    if(Auth::check()){
+        return redirect(route('user.private'));
+    }
+    return view('user.registration');
+})->name('registration');
 
 Route::resource(
     'user',
@@ -72,7 +79,7 @@ Route::resource(
             'show',
             'edit',
             'update',
-            'create',
+            'create'
         ],
     ]
 );

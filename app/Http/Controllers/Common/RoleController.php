@@ -71,7 +71,7 @@ class RoleController extends Controller
         } else {
             dd('edit');
         }
-        dd($request->method());
+        //dd($request->method());
     }
 
     public function delete($id)
